@@ -1,0 +1,1006 @@
+!<arch>
+ft_atoi.c/      0           0     0     644     1621      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 16:59:36 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/20 16:59:37 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stddef.h>
+
+int atoi(const char *str)
+{
+	int	s;
+	int	m;
+	int	b;
+
+	s = 0;
+	m = 1;
+	while ((str[s] == ' ') || ((str[s] >= '\a') && (str[s] <= '\r')))
+		s++;
+	while ((str[s] == '+') || (str[s] == '-'))
+	{
+		if (str[s] == '-')
+			m *= -1;
+		s++;
+	}
+	b = 0;
+	while (str[s] && str[s] >= '0' && str[s] <= '9')
+	{
+		b = (b * 10) + (str[s] - '0');
+		s++;
+	}
+	return (b * m);
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main () 
+{
+   int val;
+   char str[20];
+   
+   strcpy(str, "98993489");
+   val = atoi(str);
+   printf("String value = %s, Int value = %d\n", str, val);
+
+   strcpy(str, "tutorialspoint.com");
+   val = atoi(str);
+   printf("String value = %s, Int value = %d\n", str, val);
+
+   return(0);
+}
+ft_toupper.c/   0           0     0     644     1405      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 16:58:09 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/20 16:58:10 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int	ft_toupper(int i)
+{
+	if (i >= 'a' && i <= 'z')
+		return (i = i - 32);
+	else
+		return (i);
+}
+
+#include <stdio.h>
+#include <ctype.h>
+int main() {
+    char c;
+
+    c = 'm';
+    printf("%c -> %c", c, toupper(c));
+
+    c = 'D';
+    printf("\n%c -> %c", c, toupper(c));
+
+    c = '9';
+    printf("\n%c -> %c\n", c, toupper(c));
+
+    c = 'm';
+    printf("%c -> %c", c, ft_toupper(c));
+
+    c = 'D';
+    printf("\n%c -> %c", c, ft_toupper(c));
+
+    c = '9';
+    printf("\n%c -> %c", c, ft_toupper(c));
+    return 0;
+}
+
+ft_strnstr.c/   0           0     0     644     1792      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 16:59:27 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/20 16:59:27 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stddef.h>
+
+char	*ft_strnstr(const char *str, const char *wrd, size_t len)
+{
+    size_t d;
+	size_t p;
+
+    d = 0;
+	if (wrd[0] == '\0')
+		return ((char *)str);
+	while (str[d] != '\0')
+	{
+		p = 0;
+		while (str[d + p] == wrd[p] && (d + p) < len)
+		{
+			if (str[d + p] == '\0' && wrd[p] == '\0')
+				return ((char *)&str[p]);
+			p++;
+		}
+		if (wrd[p] == '\0')
+			return ((char *)str + d);
+		d++;
+	}
+	return (0);
+}
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char *haystack = "Was this the face that launch'd a thousand ships";
+    char *needle = "face";
+    char *location;
+
+    location = ft_strnstr(haystack,needle,5);
+    if( location == NULL)
+        perror("String not found");
+    else
+    {
+        printf("String '%s' was found at position %d in string '%s'.\n",
+            needle,
+            (int)location-(int)haystack+1,
+            haystack);
+    }
+
+    return(0);
+
+}
+ft_strncmp.c/   0           0     0     644     1191      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 16:58:44 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/20 16:58:45 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stddef.h>
+
+int strncmp(const char *str1, const char *str2, size_t n)
+{
+    size_t	i;
+
+	if (n == 0)
+		return (0);
+
+	i = 0;
+	while (str1[i] == str2[i] && str1[i] != '\0')
+	{
+		if (i < (n - 1))
+			i++;
+		else
+			return (0);
+	}
+	return ((unsigned char)(str1[i]) - (unsigned char)(str2[i]));
+}
+
+ft_strlen.c/    0           0     0     644     1439      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/12 17:58:37 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/12 17:58:38 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stddef.h>
+
+size_t	ft_strlen(const char *c)
+{
+	size_t	count;
+
+	count = 0;
+	while (*c++)
+		++count;
+	return (count);
+}
+
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+    char a[20]="Program";
+    char b[20]={'P','r','o','g','r','a','m','\0'};
+
+    // using the %zu format specifier to print size_t
+    printf("Length of string a = %zu \n",strlen(a));
+    printf("Length of string b = %zu \n",strlen(b));
+
+    printf("Length of string a = %zu \n",ft_strlen(a));
+    printf("Length of string b = %zu \n",ft_strlen(b));
+
+    return 0;
+}
+ft_strlcat.c/   0           0     0     644     1544      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 16:57:53 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/20 16:57:54 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stddef.h>
+
+size_t	ft_strlcat(char *dst, const char *src, size_t dstlen)
+{
+	size_t	i;
+    size_t  j;
+    int aux;
+
+	i = 0;
+	while (*dst && i < dstlen)
+	{
+        dst++;
+        i++;
+    }
+    aux = dstlen - i;
+	j = ft_strlcpy(dst, src, aux) + i;
+	return (j);
+}
+
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+	char first[] = "This is ";
+	char last[] = "a potentially long string";
+	int r;
+	int size = 16;
+	char buffer[size];
+
+	ft_strcpy(buffer,first);
+	r = ft_strlcat(buffer,last,size);
+
+	puts(buffer);
+	printf("Value returned: %d\n",r);
+	if( r > size )
+		puts("String truncated");
+	else
+		puts("String was fully copied");
+
+	return(0);
+}ft_isprint.c/   0           0     0     644     1481      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/12 16:14:36 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/12 16:14:37 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+int	ft_isprint (int c)
+{
+	return (c >= 32   && c <= 126);
+}
+
+
+#include <ctype.h>
+#include <stdio.h>
+
+int main()
+{
+    char c;
+
+    c = 'Q';
+    printf("Result when a printable character %c is passed to isprint(): %d", c, isprint(c));
+
+    c = '\n';
+    printf("\nResult when a control character %c is passed to isprint(): %d", c, isprint(c));
+   
+    c = 'Q';
+    printf("\nResult when a printable character %c is passed to isprint(): %d", c, ft_isprint(c));
+
+    c = '\n';
+    printf("\nResult when a control character %c is passed to isprint(): %d", c, ft_isprint(c));
+
+    return 0;
+}
+
+ft_bzero.c/     0           0     0     644     954       `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 16:57:11 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/20 16:57:12 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+void	ft_bzero(void *str, int n)
+{
+	ft_memset(str, '\0', n);
+}
+ft_calloc.c/    0           0     0     644     1505      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 16:59:51 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/20 16:59:51 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stddef.h>
+void *calloc(size_t nitems, size_t size)
+{
+    void    *res;
+
+    res = malloc(size *nitems);
+    if(!res)
+        return(0);
+    ft_bzero(res, size * nitems);
+	return (res);
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main () {
+   int i, n;
+   int *a;
+
+   printf("Number of elements to be entered:");
+   scanf("%d",&n);
+
+   a = (int*)calloc(n, sizeof(int));
+   printf("Enter %d numbers:\n",n);
+   for( i=0 ; i < n ; i++ ) {
+      scanf("%d",&a[i]);
+   }
+
+   printf("The numbers entered are: ");
+   for( i=0 ; i < n ; i++ ) {
+      printf("%d ",a[i]);
+   }
+   free( a );
+   
+   return(0);
+}
+ft_atoi.c/      0           0     0     644     1621      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 16:59:36 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/20 16:59:37 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stddef.h>
+
+int atoi(const char *str)
+{
+	int	s;
+	int	m;
+	int	b;
+
+	s = 0;
+	m = 1;
+	while ((str[s] == ' ') || ((str[s] >= '\a') && (str[s] <= '\r')))
+		s++;
+	while ((str[s] == '+') || (str[s] == '-'))
+	{
+		if (str[s] == '-')
+			m *= -1;
+		s++;
+	}
+	b = 0;
+	while (str[s] && str[s] >= '0' && str[s] <= '9')
+	{
+		b = (b * 10) + (str[s] - '0');
+		s++;
+	}
+	return (b * m);
+}
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main () 
+{
+   int val;
+   char str[20];
+   
+   strcpy(str, "98993489");
+   val = atoi(str);
+   printf("String value = %s, Int value = %d\n", str, val);
+
+   strcpy(str, "tutorialspoint.com");
+   val = atoi(str);
+   printf("String value = %s, Int value = %d\n", str, val);
+
+   return(0);
+}
+ft_memcpy.c/    0           0     0     644     1434      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 16:57:24 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/20 16:57:25 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stddef.h>
+void *memcpy(void *dest, const void * src, size_t n)
+{
+	size_t i;
+
+	if (!dest && !src)
+		return (0);
+	i = 0;
+	while (i < n)
+	{
+		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+		i++;
+	}
+	return (dest);
+}
+
+#include <stdio.h>
+#include <string.h>
+
+int main () {
+   const char src[50] = "http://www.tutorialspoint.com";
+   char dest[50];
+   strcpy(dest,"Heloooo!!");
+   printf("Before memcpy dest = %s\n", dest);
+   ft_memcpy(dest, src, strlen(src)+1);
+   printf("After memcpy dest = %s\n", dest);
+   
+   return(0);
+}ft_memmove.c/   0           0     0     644     1599      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 16:57:38 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/20 16:57:39 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stddef.h>
+
+void *ft_memmove(void *str1, const void *str2, size_t n)
+{
+	size_t i;
+
+	if (!str1 && !str2)
+		return (0);
+	i = 0;
+	if ((size_t)str1 - (size_t)str2 < n)
+	{
+		i = n - 1;
+		while (i >= 0 && i < n)
+		{
+			((unsigned char *)str1)[i] = ((unsigned char *)str2)[i];
+			i--;
+		}
+	}
+	else
+	{
+		while (i < n)
+		{
+			((unsigned char *)str1)[i] = ((unsigned char *)str2)[i];
+			i++;
+		}
+	}
+	return (str1);
+}
+
+
+#include <stdio.h>
+#include <string.h>
+
+int main () {
+   char dest[] = "oldstring";
+   const char src[]  = "newstring";
+
+   printf("Before memmove dest = %s, src = %s\n", dest, src);
+   ft_memmove(dest, src, 2);
+   printf("After memmove dest = %s, src = %s\n", dest, src);
+
+   return(0);
+}
+ft_memchr.c/    0           0     0     644     1418      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 16:58:57 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/20 16:58:58 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stddef.h>
+
+void *ft_memchr(const void *str, int c, size_t n)
+{
+    size_t  i;
+
+    i = 0;
+    while (i < n)
+    {
+        if (((unsigned char*)str)[i] == (unsigned char)c)
+            return ((void*)(str + i));
+        i++;
+    }       
+    return (0);
+}
+
+#include <stdio.h>
+#include <string.h>
+
+int main () {
+   const char str[] = "http://www.tutorialspoint.com";
+   const char ch = '.';
+   char *ret;
+
+   ret = ft_memchr(str, ch, strlen(str));
+
+   printf("String after |%c| is - |%s|\n", ch, ret);
+
+   return(0);
+}ft_memcmp.c/    0           0     0     644     1569      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 16:59:15 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/20 16:59:15 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stddef.h>
+
+int ft_memcmp(const void *str1, const void *str2, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		if (((unsigned char *)str1)[i] != ((unsigned char *)str2)[i])
+			return (((unsigned char *)str1)[i] - ((unsigned char *)str2)[i]);
+		i++;
+	}
+	return (0);
+}
+
+#include <stdio.h>
+#include <string.h>
+
+int main () {
+   char str1[15];
+   char str2[15];
+   int ret;
+
+   memcpy(str1, "abcdef", 6);
+   memcpy(str2, "ABCDEF", 6);
+
+   ret = ft_memcmp(str1, str2, 5);
+
+   if(ret > 0) {
+      printf("str2 is less than str1");
+   } else if(ret < 0) {
+      printf("str1 is less than str2");
+   } else {
+      printf("str1 is equal to str2");
+   }
+   
+   return(0);
+}
+
+ft_strchr.c/    0           0     0     644     1358      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 16:58:33 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/20 16:58:34 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+char	*ft_strchr(const char *str, int c)
+{
+	while (*str != (unsigned char)c)
+		if (!*str++)
+			return (0);
+	return ((char *)str);
+}
+
+#include <stdio.h>
+#include <string.h>
+
+int main () {
+   const char str[] = "http://www.tutorialspoint.com";
+   const char ch = '.';
+   char *ret;
+
+   ret = strchr(str, ch);
+
+   printf("String after |%c| is - |%s|\n", ch, ret);
+   
+   ret = ft_strchr(str, ch);
+
+   printf("String after |%c| is - |%s|\n", ch, ret);
+   
+   return(0);
+}ft_tolower.c/   0           0     0     644     1406      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 16:58:23 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/20 16:58:24 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int	ft_tolower(int i)
+{
+	if (i >= 'A' && i <= 'Z')
+		return (i = i + 32);
+	else
+		return (i);
+}
+
+#include <stdio.h>
+#include <ctype.h>
+int main() {
+    char c;
+
+    c = 'm';
+    printf("%c -> %c", c, tolower(c));
+
+    c = 'D';
+    printf("\n%c -> %c", c, tolower(c));
+
+    c = '9';
+    printf("\n%c -> %c\n", c, tolower(c));
+
+    c = 'm';
+    printf("%c -> %c", c, ft_tolower(c));
+
+    c = 'D';
+    printf("\n%c -> %c", c, ft_tolower(c));
+
+    c = '9';
+    printf("\n%c -> %c", c, ft_tolower(c));
+    return 0;
+}
+
+ft_strlcpy.c/   0           0     0     644     1687      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/04 10:23:58 by franalme          #+#    #+#             */
+/*   Updated: 2023/01/04 10:23:59 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stddef.h>
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstlen)
+{
+	size_t	i;
+
+	i = 0;
+	while (*src && i + 1 < dstlen)
+	{
+		*dst++ = *src++;
+		++i;
+	}
+	if (i < dstlen)
+		*dst = 0;
+	while (*src++)
+		++i;
+	return (i);
+}
+
+#include <stdio.h>
+#include <string.h>
+
+void test(int size)
+{
+    char string[] = "Hello there, Venus";
+    char buffer[19];
+    int s;
+
+    // r = strlcpy(buffer,string,size);
+
+    // printf("Copied '%s' into '%s', length %d\n",
+    //         string,
+    //         buffer,
+    //         r
+    //       );
+    
+    s = ft_strlcpy(buffer,string,size);
+
+    printf("Copied '%s' into '%s', length %d\n",
+            string,
+            buffer,
+            s
+          );
+
+}
+
+int main()
+{
+    test(19);
+    test(10);
+    test(1);
+    test(0);
+
+    return(0);
+}
+ft_memset.c/    0           0     0     644     1294      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/20 16:56:51 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/20 16:56:52 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+void *ft_memset(void *str, int c, int n)
+{
+    int  i;
+
+    i = 0;
+    while (i < n)
+    {
+        ((unsigned char*)str)[i] = c;
+        i++;
+    }
+    return (str);
+}
+
+#include <stdio.h>
+#include <string.h>
+
+int main () {
+   char str[50];
+
+   strcpy(str,"This is string.h library function");
+   puts(str);
+
+   memset(str,'$',7);
+   puts(str);
+   ft_memset(str,'@',7);
+   puts(str);
+   
+   return(0);
+}ft_isascii.c/   0           0     0     644     1482      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/12 15:43:33 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/12 15:43:34 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int	ft_isascii (int c)
+{
+	return (c >= 1 && c <= 127);
+}
+
+#include <stdio.h>
+#include <ctype.h>
+ 
+int main(void)
+{
+   int ch;
+ 
+   for (ch = 0x7c; ch <= 0x82; ch++) {
+      printf("%#04x    ", ch);
+      if (isascii(ch))
+         printf("The character is %c\n", ch);
+      else
+         printf("Cannot be represented by an ASCII character\n");
+    }
+   for (ch = 0x7c; ch <= 0x82; ch++) {
+      printf("%#04x    ", ch);
+      if (ft_isascii(ch))
+         printf("The character is %c\n", ch);
+      else
+         printf("Cannot be represented by an ASCII character\n");
+   }
+ 
+   return 0;
+}ft_isalnum.c/   0           0     0     644     1975      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/12 15:04:47 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/12 15:32:46 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int	ft_isalnum (int c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9'))
+		return (1);
+	return (0);
+}
+
+#include <stdio.h>
+#include <ctype.h>
+int main()
+{
+    char c;
+    int result;
+
+    c = '5';
+    result = isalnum(c);
+    printf("When %c is passed, return value is %d\n", c, result);
+
+    c = 'Q';
+    result = isalnum(c);
+    printf("When %c is passed, return value is %d\n", c, result);
+
+    c = 'l';
+    result = isalnum(c);
+    printf("When %c is passed, return value is %d\n", c, result);
+
+    c = '+';
+    result = isalnum(c);
+    printf("When %c is passed, return value is %d\n", c, result);
+
+    c = '5';
+    result = ft_isalnum(c);
+    printf("When %c is passed, return value is %d\n", c, result);
+
+    c = 'Q';
+    result = ft_isalnum(c);
+    printf("When %c is passed, return value is %d\n", c, result);
+
+    c = 'l';
+    result = ft_isalnum(c);
+    printf("When %c is passed, return value is %d\n", c, result);
+
+    c = '+';
+    result = ft_isalnum(c);
+    printf("When %c is passed, return value is %d\n", c, result);
+
+    return 0;
+}
+ft_isdigit.c/   0           0     0     644     972       `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/05 11:51:05 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/05 11:51:20 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
+ft_isalpha.c/   0           0     0     644     1269      `
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/05 10:55:03 by franalme          #+#    #+#             */
+/*   Updated: 2022/12/05 10:56:05 by franalme         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int	ft_isalpha(int c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (c);
+	else
+		return (0);
+	
+}
+
+#include <stdio.h>
+#include <ctype.h>
+int main()
+{
+    char c;
+
+    printf("Enter a character: ");
+    scanf("%c", &c);
+
+    if (isalpha(c) == 0)
+         printf("%c is not an alphabet.", c);
+    else
+         printf("%c is an alphabet.", c);
+
+    return 0;
+}
