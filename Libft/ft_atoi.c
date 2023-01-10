@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "libft.h"
 
-int atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	int	s;
 	int	m;
@@ -37,22 +37,23 @@ int atoi(const char *str)
 	return (b * m);
 }
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+// #include <stdio.h>
+// #include <stdlib.h>
+// #include <string.h>
 
-int main () 
-{
-   int val;
-   char str[20];
-   
-   strcpy(str, "98993489");
-   val = atoi(str);
-   printf("String value = %s, Int value = %d\n", str, val);
+// int main () 
+// {
+//    int val;
+//    char str[20];
+//  
+//    strcpy(str, "98993489");
+//    val = atoi(str);
+//    printf("String value = %s, Int value = %d\n", str, val);
 
-   strcpy(str, "tutorialspoint.com");
-   val = atoi(str);
-   printf("String value = %s, Int value = %d\n", str, val);
+//    strcpy(str, "tutorialspoint.com");
+//    val = atoi(str);
+//    printf("String value = %s, Int value = %d\n", str, val);
 
-   return(0);
-}
+//    return(0);
+// }
+// 

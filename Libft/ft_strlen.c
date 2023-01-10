@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
 size_t	ft_strlen(const char *c)
 {
@@ -22,19 +22,19 @@ size_t	ft_strlen(const char *c)
 	return (count);
 }
 
-#include <stdio.h>
-#include <string.h>
-int main()
-{
-    char a[20]="Program";
-    char b[20]={'P','r','o','g','r','a','m','\0'};
+// #include <stdio.h>
+// #include <string.h>
+// int main()
+// {
+//     char a[20]="Program";
+//     char b[20]={'P','r','o','g','r','a','m','\0'};
 
-    // using the %zu format specifier to print size_t
-    printf("Length of string a = %zu \n",strlen(a));
-    printf("Length of string b = %zu \n",strlen(b));
+//     // using the %zu format specifier to print size_t
+//     printf("Length of string a = %zu \n",strlen(a));
+//     printf("Length of string b = %zu \n",strlen(b));
 
-    printf("Length of string a = %zu \n",ft_strlen(a));
-    printf("Length of string b = %zu \n",ft_strlen(b));
+//     printf("Length of string a = %zu \n",ft_strlen(a));
+//     printf("Length of string b = %zu \n",ft_strlen(b));
 
-    return 0;
-}
+//     return 0;
+// }

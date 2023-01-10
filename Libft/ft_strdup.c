@@ -10,18 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-char * ft_strdup( const char *str1 )
+char	*ft_strdup( const char *str1 )
 {
-    size_t len;
-    char *out;
+	size_t	len;
+	char	*out;
 
-    len = ft_strlen(str1);
-    out = malloc(sizeof(char) * (len + 1));
-    if (!out)
-        return (0);
-    ft_strlcpy(out ,str1, len + 1);
-    return (out);
-
+	len = ft_strlen(str1);
+	out = malloc(sizeof(char) * (len + 1));
+	if (!out)
+		return (0);
+	ft_strlcpy (out, str1, len + 1);
+	return (out);
 }

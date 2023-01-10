@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
 char	*ft_strnstr(const char *str, const char *wrd, size_t len)
 {
-    size_t d;
-	size_t p;
+	size_t	d;
+	size_t	p;
 
-    d = 0;
+	d = 0;
 	if (wrd[0] == '\0')
 		return ((char *)str);
 	while (str[d] != '\0')
@@ -34,27 +34,4 @@ char	*ft_strnstr(const char *str, const char *wrd, size_t len)
 		d++;
 	}
 	return (0);
-}
-#include <stdio.h>
-#include <string.h>
-
-int main()
-{
-    char *haystack = "Was this the face that launch'd a thousand ships";
-    char *needle = "face";
-    char *location;
-
-    location = ft_strnstr(haystack,needle,5);
-    if( location == NULL)
-        perror("String not found");
-    else
-    {
-        printf("String '%s' was found at position %d in string '%s'.\n",
-            needle,
-            (int)location-(int)haystack+1,
-            haystack);
-    }
-
-    return(0);
-
 }

@@ -1,28 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: franalme <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/20 16:57:24 by franalme          #+#    #+#             */
-/*   Updated: 2022/12/20 16:57:25 by franalme         ###   ########.fr       */
+/*   Created: 2023/01/10 15:43:34 by franalme          #+#    #+#             */
+/*   Updated: 2023/01/10 15:43:35 by franalme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*memcpy(void *dest, const void *src, size_t n)
+static	size_t	digits(long int n)
 {
-	size_t	i;
+	long int	i;
 
-	if (!dest && !src)
-		return (0);
-	i = 0;
-	while (i < n)
+	i = 1;
+	while (n >= 10)
 	{
-		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+		n /= 10;
 		i++;
 	}
-	return (dest);
+	return (i);
+}
+
+char	*ft_itoa(int n)
+{
+	long int	temp;
+	int			len;
+	char		*res;
+	int			i;
+
+	res = NULL;
+	temp = n;
+	len = digits(temp);
+	if (temp < 0)
+	{
+		temp = -temp;
+		len ++;
+	}
+	res[len] = '\0';
+	i = len - 1;
+	while (i >= 0)
+	{
+		res[i] = (temp % 10) + '0';
+		temp /= 10;
+		i--;
+	}
+	if (n < 0)
+		res[0] = '-';
+	return (res);
 }

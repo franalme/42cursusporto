@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include "libft.h"
 
-void *ft_memmove(void *str1, const void *str2, size_t n)
+void	*ft_memmove(void *str1, const void *str2, size_t n)
 {
-	size_t i;
+	size_t	i;
 
 	if (!str1 && !str2)
 		return (0);
@@ -39,17 +39,16 @@ void *ft_memmove(void *str1, const void *str2, size_t n)
 	return (str1);
 }
 
+// #include <stdio.h>
+// #include <string.h>
 
-#include <stdio.h>
-#include <string.h>
+// int main () {
+//    char dest[] = "oldstring";
+//    const char src[]  = "newstring";
 
-int main () {
-   char dest[] = "oldstring";
-   const char src[]  = "newstring";
+//    printf("Before memmove dest = %s, src = %s\n", dest, src);
+//    ft_memmove(dest, src, 2);
+//    printf("After memmove dest = %s, src = %s\n", dest, src);
 
-   printf("Before memmove dest = %s, src = %s\n", dest, src);
-   ft_memmove(dest, src, 2);
-   printf("After memmove dest = %s, src = %s\n", dest, src);
-
-   return(0);
-}
+//    return(0);
+// }
